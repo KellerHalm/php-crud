@@ -20,30 +20,52 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Age</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Uveys</td>
-                <td>Dzaurov</td>
-                <td>20</td>
-            </tr>
-            
-            <tr>
-                <td>2</td>
-                <td>Maga</td>
-                <td>Magaev</td>
-                <td>21</td>
-            </tr>
+           <?php
+
+                require_once 'dbcon.php';
+           
+                $query = "select * from `students`";
+                $result = mysqli_query($connection, $query);
+                 
+                if (!$result) {
+                    echo "Ошибка при получении данных". mysqli_error($connection);
+                } else {
+                    while ($row = mysqli_fetch_array($result)) {
+                        ?>  
+                            <tr>
+                                <td> <?php echo $row['id'];         ?>                                                                      </td>
+                                <td> <?php echo $row['first_name']; ?>                                                                      </td>
+                                <td> <?php echo $row['last_name'];  ?>                                                                      </td>
+                                <td> <?php echo $row['age'];        ?>                                                                      </td>
+                                <td> <a type="button" class="btn btn-info" href="update_data.php?id=<?php echo $row['id']; ?>"> UPDATE </a> </td>
+                                <td> <a type="button" class="btn btn-danger" href=""> DELETE </a>                                           </td>
+                            </tr>
+                        <?php
+                    } 
+                }
+
+           ?>
         </tbody>
     </table>
 
     <?php
 
-        if ($_GET["message"]) {
-            echo "<h6>".$_GET["message"]."</h6>";
+        if (isset($_GET["message"])) {
+            echo "<h6 class='error'>".$_GET["message"]."</h6>";
+        }
+
+    ?>
+
+    <?php
+
+        if (isset($_GET["insert_msg"])) {
+            echo "<h6 class='ok'>".$_GET["insert_msg"]."</h6>";
         }
 
     ?>
