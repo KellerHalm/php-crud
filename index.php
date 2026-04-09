@@ -39,12 +39,12 @@
                     while ($row = mysqli_fetch_array($result)) {
                         ?>  
                             <tr>
-                                <td> <?php echo $row['id'];         ?>                                                                      </td>
-                                <td> <?php echo $row['first_name']; ?>                                                                      </td>
-                                <td> <?php echo $row['last_name'];  ?>                                                                      </td>
-                                <td> <?php echo $row['age'];        ?>                                                                      </td>
+                                <td> <?php echo $row['id'];         ?> </td>
+                                <td> <?php echo $row['first_name']; ?> </td>
+                                <td> <?php echo $row['last_name'];  ?> </td>
+                                <td> <?php echo $row['age'];        ?> </td>
                                 <td> <a type="button" class="btn btn-info" href="update_data.php?id=<?php echo $row['id']; ?>"> UPDATE </a> </td>
-                                <td> <a type="button" class="btn btn-danger" href=""> DELETE </a>                                           </td>
+                                <td> <a type="button" class="btn btn-danger" href=""> DELETE </a> </td>
                             </tr>
                         <?php
                     } 
@@ -67,6 +67,18 @@
         if (isset($_GET["insert_msg"])) {
             echo "<h6 class='ok'>".$_GET["insert_msg"]."</h6>";
         }
+
+    ?>
+
+    <?php
+    
+        if (isset($_GET["update_msg"])) {
+            echo 
+                "<div class='alert alert-success' role='alert'>"
+                  . $_GET["update_msg"]  .
+                "</div>"
+            ;
+        } 
 
     ?>
 
